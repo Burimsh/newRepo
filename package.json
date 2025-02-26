@@ -19,9 +19,9 @@
   "homepage": "https://github.com/rat9615/simple-nodejs-app#readme",
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^4.17.3",
+    "express": "^4.20.0",
     "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.1.9",
     "request": "^2.88.2",
     "wiki-infobox-parser": "^0.1.11"
   }
