@@ -1,0 +1,14 @@
+name: Build and Push Docker image
+
+on:
+  push:
+      branches: [ "test" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout out repository
+        uses: actions/checkout@v2
