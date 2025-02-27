@@ -2,7 +2,7 @@ name: Build node-js
 
 on: 
   push:
-    branches: [ "main" ]
+    branches: [ "none" ]
 
 jobs:
   build:
