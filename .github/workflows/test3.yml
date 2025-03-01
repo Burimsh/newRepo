@@ -15,16 +15,13 @@ jobs:
       - name: Login to GitHub Container Registry
         run: |
           echo "${{ secrets.Access_Token}}" docker login ghcr.io -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-      
-      - name: Build docker image
-        run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/main:latest . 
-
+                
       - name: Build and Push Docker Image
         run: |
-          IMAGE=ghcr.io/${{ github.burimsh }}/main:latest
-          docker build -t $IMAGE .
-          docker push $IMAGE
+            IMAGE="ghcr.io/burimsh/newrepo:latest"
+            echo "Using image tag: $IMAGE"
+            docker build -t $IMAGE .
+            docker push $IMAGE
 
 
 
