@@ -11,17 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Login to GitHub Container Registry
+      - name: Build and push the image
         run: |
-          echo "${{ secrets.ACCESS_TOKEN}}" docker login ghcr.io -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+          docker login --username burimsh --password ${{ secrets.GH_PAT }} ghcr.io
+          docker build . --tag ghcr.io/burimsh/hello-world-ghcr:latest
+          docker push ghcr.io/burimsh/hello-world-ghcr:latest
 
-      - name: Build and Push Docker Image
-        run: |
-            IMAGE="ghcr.io/burimsh/newrepo:latest"
-            echo "Using image tag: $IMAGE"
-            docker build -t $IMAGE .
-            docker push $IMAGE
 
 
 
