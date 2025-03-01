@@ -18,7 +18,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          IMAGE="ghcr.io/burimsh/newRepo:latest"
+          IMAGE="ghcr.io/burimsh/newrepo:latest"
           echo "Using image tag: $IMAGE"
           docker build -t $IMAGE .
           docker push $IMAGE
