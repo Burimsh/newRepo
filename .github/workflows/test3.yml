@@ -21,7 +21,7 @@ jobs:
 
       - name: Push docker image
         run: |
-            docker push 
+            docker push .
 
 
 
