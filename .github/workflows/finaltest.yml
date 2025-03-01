@@ -1,7 +1,7 @@
 name: Docker Image CI for GHCR
 on:
   push:
-      branches: [ "main" ]
+
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
@@ -10,5 +10,3 @@ jobs:
       - name: Build and push the image
         run : |
           docker login --username burimsh --password ${{ secrets.GH_PAT }} ghcr.io
-          docker build . --tag ghcr.io/burimsh/test:latest
-          docker push ghcr.io/burimsh/test:latest
