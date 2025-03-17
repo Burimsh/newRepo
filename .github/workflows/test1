@@ -11,6 +11,9 @@ on:
 jobs:
   test-mysql:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./database-lab
 
     services:
       mysql:
