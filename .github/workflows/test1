@@ -1,0 +1,56 @@
+name: MySQL CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-mysql:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: demo_db
+          MYSQL_USER: demouser
+          MYSQL_PASSWORD: demopassword
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -prootpassword"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Wait for MySQL to be ready
+        run: |
+          for i in {1..30}; do
+            if mysql -h127.0.0.1 -uroot -prootpassword -e "SELECT 1;" &> /dev/null; then
+              echo "MySQL is ready!"
+              exit 0
+            fi
+            echo "Waiting for MySQL..."
+            sleep 5
+          done
+          echo "MySQL did not start in time"
+          exit 1
+
+      - name: Run SQL Init Scripts
+        run: |
+          mysql -h127.0.0.1 -uroot -prootpassword demo_db < init-scripts/01-create-table.sql
+          mysql -h127.0.0.1 -uroot -prootpassword demo_db < init-scripts/02-sead-data.sql
+
+      - name: Verify Database & Data
+        run: |
+          mysql -h127.0.0.1 -uroot -prootpassword -e "SHOW TABLES;" demo_db
+          mysql -h127.0.0.1 -uroot -prootpassword -e "SELECT * FROM employees;" demo_db
