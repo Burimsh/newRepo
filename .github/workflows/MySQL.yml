@@ -14,10 +14,10 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: rootpassword
-          MYSQL_DATABASE: demo_db
-          MYSQL_USER: demouser
-          MYSQL_PASSWORD: demopassword
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         ports:
           - 3306:3306
         options: >-
@@ -50,5 +50,5 @@ jobs:
 
       - name: Verify Database & Data
         run: |
-          mysql -h127.0.0.1 -uroot -prootpassword -e "SHOW TABLES;" demo_db
-          mysql -h127.0.0.1 -uroot -prootpassword -e "SELECT * FROM employees;" demo_db
+          mysql -h127.0.0.1 -uroot -p"${{ secrets.MYSQL_ROOT_PASSWORD }}" ${{ secrets.MYSQL_DATABASE }} < init-scripts/01-create-table.sql
+          mysql -h127.0.0.1 -u"${{ secrets.MYSQL_USER }}" -p"${{ secrets.MYSQL_PASSWORD }}" ${{ secrets.MYSQL_DATABASE }} < init-scripts/02-seed-data.sql
