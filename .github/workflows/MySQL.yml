@@ -46,7 +46,7 @@ jobs:
       - name: Run SQL Init Scripts
         run: |
           mysql -h127.0.0.1 -uroot -prootpassword demo_db < init-scripts/01-create-table.sql
-          mysql -h127.0.0.1 -uroot -prootpassword demo_db < init-scripts/02-sead-data.sql
+          mysql -h127.0.0.1 -uroot -prootpassword demo_db < init-scripts/02-seed-data.sql
 
       - name: Verify Database & Data
         run: |
