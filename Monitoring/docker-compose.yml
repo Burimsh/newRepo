@@ -9,10 +9,20 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: demo_db
+      MYSQL_USER: exporter
+      MYSQL_PASSWORD: exporterpass
     ports:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
+  mysqld-exporter:
+    image: prom/mysqld-exporter:latest
+    environment:
+      DATA_SOURCE_NAME: "exporter:exporterpass@(mysql:3306)/demo_db"
+    ports:
+      - "9104:9104"
+    depends_on:
+      - mysql
   prometheus:
     image: prom/prometheus:latest
     volumes:
