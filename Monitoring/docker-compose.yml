@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  node-exporter:
-    image: prom/node-exporter:latest
-    ports:
-      - "9100:9100"
+  #node-exporter:
+   # image: prom/node-exporter:latest
+    #ports:
+    #  - "9100:9100"
   
   # MySQL Service
   mysql:
@@ -19,14 +19,14 @@ services:
       - mysql-data:/var/lib/mysql
   
   # MySQL Exporter
-  mysqld-exporter:
-    image: prom/mysqld-exporter:latest
-    environment:
-      DATA_SOURCE_NAME: "user:password@tcp(mysql:3306)/"   
-    ports:
-      - "9104:9104"
-    depends_on:
-      - mysql
+  #mysqld-exporter:
+    #image: prom/mysqld-exporter:latest
+    #environment:
+      #DATA_SOURCE_NAME: "user:password@tcp(mysql:3306)/"   
+    #ports:
+      #- "9104:9104"
+    #depends_on:
+    #  - mysql
   
   # PostgreSQL Service
   postgres:
