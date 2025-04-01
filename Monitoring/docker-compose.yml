@@ -45,8 +45,6 @@ services:
     image: quay.io/prometheuscommunity/postgres-exporter:latest
     environment:
       DATA_SOURCE_NAME: "postgresql://postgres:example@postgres:5432/demo_db?sslmode=disable"
-    depends_on:
-      - postgres
     ports:
       - "9187:9187"
 
