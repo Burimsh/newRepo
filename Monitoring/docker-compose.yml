@@ -55,7 +55,7 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus.yml
     depends_on:
-      - postgres_exporter
+      - postgres
     ports:
       - "9090:9090"
   
