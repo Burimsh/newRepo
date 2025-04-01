@@ -30,7 +30,7 @@ services:
   
   # PostgreSQL Service
   postgres:
-    image: postgres:15
+    image: postgres:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
