@@ -1,67 +1,43 @@
 version: '3.8'
 services:
-  #node-exporter:
-   # image: prom/node-exporter:latest
-    #ports:
-    #  - "9100:9100"
-  
-  # MySQL Service
-  mysql:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: demo_db
-      MYSQL_USER: exporter
-      MYSQL_PASSWORD: exporterpass
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-  
-  # MySQL Exporter
-  #mysqld-exporter:
-    #image: prom/mysqld-exporter:latest
-    #environment:
-      #DATA_SOURCE_NAME: "user:password@tcp(mysql:3306)/"   
-    #ports:
-      #- "9104:9104"
-    #depends_on:
-    #  - mysql
-  
-  # PostgreSQL Service
+
   postgres:
     image: postgres:latest
+    container_name: postgres
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: example
-      POSTGRES_DB: demo_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-  
-  # PostgreSQL Exporter
-  postgres-exporter:
-    image: quay.io/prometheuscommunity/postgres-exporter:latest
-    environment:
-      DATA_SOURCE_NAME: "postgresql://postgres:example@postgres:5432/demo_db?sslmode=disable"
-    depends_on:
-      - postgres
-    ports:
-      - "9187:9187"
+      - pgdata:/var/lib/postgresql/data
 
-  
+  postgres_exporter:
+    image: wrouesnel/postgres_exporter:latest
+    container_name: postgres_exporter
+    environment:
+      DATA_SOURCE_NAME: "postgresql://admin:admin@postgres:5432/mydatabase?sslmode-disable"
+    depends_on:
+      -postgres
+    ports:
+      -"9187:9187"   
+
   # Prometheus
   prometheus:
     image: prom/prometheus:latest
+    container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus.yml
+    depends_on:
+      - postgres_exporter
     ports:
       - "9090:9090"
   
   # Grafana
   grafana:
     image: grafana/grafana
+    container_name: grafana
     depends_on:
       - prometheus
     ports:
