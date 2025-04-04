@@ -3,12 +3,13 @@ services:
   app:
     build: .
     ports:
-      - "5001:5000"
+      - "5001:5000"  # Kept your change
     environment:
       - FLASK_APP=main.py
       - FLASK_RUN_HOST=0.0.0.0
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # Wait for db to be ready
     volumes:
       - ./app:/app
 
@@ -21,6 +22,10 @@ services:
       - MYSQL_PASSWORD=password
     volumes:
       - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
 
   prometheus:
     image: prom/prometheus:latest
