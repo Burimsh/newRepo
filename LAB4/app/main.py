@@ -1,56 +1,47 @@
 from fastapi import FastAPI
 from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 from prometheus_fastapi_instrumentator import Instrumentator
 
-# Database setup
-DATABASE_URL = "mysql+pymysql://user:password@db:3306/api_db"
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Database connection
+engine = create_engine("mysql+pymysql://user:password@db:3306/api_db")
+Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
-# Define the Item model
+# Database model
 class Item(Base):
     __tablename__ = "items"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     name = Column(String(80), nullable=False)
 
-# Create the table
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(engine)  # Create table
 
-# FastAPI app
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)  # Prometheus
 
-# Prometheus metrics
-Instrumentator().instrument(app).expose(app)
-
-# Routes
+# GET all items
 @app.get("/items")
 def get_items():
-    db = SessionLocal()
-    items = db.query(Item).all()
-    db.close()
-    return [{"id": item.id, "name": item.name} for item in items]
+    with Session() as db:
+        return db.query(Item).all()
 
+# POST new item
 @app.post("/items")
 def add_item(name: str):
-    db = SessionLocal()
-    new_item = Item(name=name)
-    db.add(new_item)
-    db.commit()
-    result = {"id": new_item.id, "name": new_item.name}
-    db.close()
-    return result
+    with Session() as db:
+        item = Item(name=name)
+        db.add(item)
+        db.commit()
+        db.refresh(item)
+        return item
 
+# DELETE item
 @app.delete("/items/{id}")
 def delete_item(id: int):
-    db = SessionLocal()
-    item = db.query(Item).filter(Item.id == id).first()
-    if item:
-        db.delete(item)
-        db.commit()
-        db.close()
-        return {"message": "Item deleted"}
-    db.close()
-    return {"error": "Item not found"}, 404
+    with Session() as db:
+        item = db.query(Item).get(id)
+        if item:
+            db.delete(item)
+            db.commit()
+            return {"message": "Item deleted"}
+        return {"error": "Item not found"}
