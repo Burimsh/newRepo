@@ -28,6 +28,8 @@ services:
     image: prom/mysqld-exporter
     ports:
       - "9104:9104"
+    volumes:
+      - ./my.cnf:/root/.my.cnf:ro
     environment:
       - DATA_SOURCE_NAME=user:password@tcp(db:3306)/
     depends_on:
