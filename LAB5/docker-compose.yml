@@ -23,7 +23,7 @@ services:
   grafana:
     image: grafana/grafana-oss:latest
     ports:
-      - 5000:3000
+      - 5000:5000
     volumes:
       - grafana-data:/var/lib/grafana
 
