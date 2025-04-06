@@ -12,6 +12,6 @@ mkdir -p $BACKUP_DIR
 docker exec $DB_CONTAINER mysqldump -u user -ppassword api_db > $BACKUP_FILE
 
 # Send email notification
-echo "Database backup completed: $BACKUP_FILE" | mail -s "Database Backup Notification" your@email.com
+echo "Database backup completed: $BACKUP_FILE" | mail -s "Database Backup Notification" burimsh.sm@email.com
 
 echo "Backup completed and email sent"
