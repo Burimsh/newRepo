@@ -1,5 +1,4 @@
 services:
-
   node_exporter:
     container_name: node_exporter
     image: prom/node-exporter:latest
@@ -23,7 +22,7 @@ services:
   grafana:
     image: grafana/grafana-oss:latest
     ports:
-      - 5000:5000
+      - 5000:3000  # Adjusted to map host 5000 to container 3000
     volumes:
       - grafana-data:/var/lib/grafana
 
