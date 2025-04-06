@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-BACKUP_DIR="/backups"
+BACKUP_DIR="./backups"
 BACKUP_FILE="$BACKUP_DIR/db_backup_$TIMESTAMP.sql"
 DB_CONTAINER="mysql"  # Match the service name in docker-compose.yml
 
