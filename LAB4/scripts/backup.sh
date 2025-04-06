@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # Create backup directory if it doesn't exist
 mkdir -p ./backups
