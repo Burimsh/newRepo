@@ -2,6 +2,7 @@ name: MySQL CI/CD Pipeline
 
 on:
   push:
+    branches: [ "none" ]
 
 jobs:
   test-mysql:
