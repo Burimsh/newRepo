@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-webapp-deployment
+  name: simple-webapp
   labels:
     app: simple-webapp
 spec:
@@ -15,7 +15,7 @@ spec:
         app: simple-webapp
     spec:
       containers:
-      - name: simple-webapp-container
+      - name: simple-webapp
         image: simple-webapp # Or minikube/simple-webapp:latest if you loaded it into Minikube
         ports:
         - containerPort: 80
