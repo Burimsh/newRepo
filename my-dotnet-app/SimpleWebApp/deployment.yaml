@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: simple-webapp-container
-        image: simple-webapp:latest # Or minikube/simple-webapp:latest if you loaded it into Minikube
+        image: simple-webapp:latest . # Or minikube/simple-webapp:latest if you loaded it into Minikube
         ports:
         - containerPort: 80
         resources:
