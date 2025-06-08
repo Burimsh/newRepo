@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-dotnet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-dotnet
+  template:
+    metadata:
+      labels:
+        app: hello-dotnet
+    spec:
+      containers:
+        - name: hello-dotnet
+          image: hello-dotnet
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
