@@ -1,0 +1,35 @@
+# NodePort or local dev files
+*.log
+*.tmp
+
+# Helm chart build outputs
+charts/*/charts/
+charts/*/tmpcharts/
+charts/*/Chart.lock
+
+# Kubernetes secrets (if any)
+secrets.yaml
+*.secret.yaml
+
+# Docker related
+*.tar
+*.img
+*.bak
+.dockerignore
+
+# Ignore Helm test files (optional)
+charts/*/templates/tests/
+
+# Mac/Linux/Windows system files
+.DS_Store
+Thumbs.db
+
+# VSCode or JetBrains IDE
+.vscode/
+.idea/
+
+# Python/venv stuff (if used)
+__pycache__/
+*.py[cod]
+env/
+venv/
