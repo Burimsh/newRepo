@@ -1,0 +1,32 @@
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Terraform plan output
+*.tfplan
+
+# .terraform directory (local modules, plugins, etc.)
+.terraform/
+
+# Terraform variable files (if they contain secrets)
+*.tfvars
+*.tfvars.json
+
+# Sensitive environment files
+.env
+*.env
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Backup and temporary files
+*.bak
+*.swp
+*~
