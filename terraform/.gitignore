@@ -30,3 +30,5 @@ Thumbs.db
 *.bak
 *.swp
 *~
+main.tf
+../mini-saas/
