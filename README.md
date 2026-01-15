@@ -1,17 +1,23 @@
-# simple-nodejs-app
+# DevOps-Cloud-Linux Labs
 
-Simple-nodejs-app is a simple web application created using [Node.js](https://github.com/nodejs/node). It uses [MediaWiki - Wikipedia's Search API](https://www.mediawiki.org/wiki/API:Opensearch) to search for anything entered by the user and parses the result in a JSON format. The infobox of the Wikipedia page is parsed using [wiki-infobox-parser](https://github.com/0x333333/wiki-infobox-parser).
+## 📌 Overview
+This repository contains hands-on **DevOps, Cloud, and Linux labs** designed for practical learning and interview preparation.  
+It demonstrates real-world scenarios including **Docker, Kubernetes, Networking, Cloud, Security, and Automation**.
 
-## Download and Installation
+All labs are structured to be **reproducible** and **GitHub-friendly**, with scripts, step-by-step instructions, and clear explanations.
 
-- Clone the repo ```https://github.com/rat9615/simple-nodejs-app```
-- [Fork, Clone or Download on Github](https://github.com/rat9615/simple-nodejs-app)
+---
 
-## Usage
+## 🎯 Objectives
+- Gain hands-on experience with Linux, Docker, and Cloud tools
+- Build interview-ready projects
+- Learn containerization, networking, and persistence
+- Organize labs professionally for GitHub portfolio
 
-- After installation, run ```npm install``` to download and install all the required dependencies.
-- Run ```npm start``` to run the web application.
+---
 
-## Live Preview
+## 📁 Lab Structure
 
-To view a live preview of this application, click [here](https://desolate-coast-53201.herokuapp.com/)
+Each lab is contained in its own folder with the following structure:
+
+
