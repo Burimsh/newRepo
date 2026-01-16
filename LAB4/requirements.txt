@@ -1,6 +1,6 @@
 fastapi==0.95.1
 uvicorn==0.21.1
 sqlalchemy==1.4.47
-pymysql==1.0.3
+pymysql==1.1.1
 prometheus-fastapi-instrumentator==6.0.0
-cryptography==38.0.4
+cryptography==44.0.1
